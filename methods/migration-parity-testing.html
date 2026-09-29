@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Migration Parity Testing: Eight Dimensions, Proven Weekly</title><style>body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#222;background:#FAFBFC;font-size:15px;line-height:1.6}.wrap{max-width:880px;margin:0 auto;padding:16px}nav{background:#1F3864;border-radius:8px;padding:10px 16px;margin-bottom:14px}nav a{color:#fff;text-decoration:none;font-size:13px;margin-right:18px}nav a:hover{text-decoration:underline}h1{color:#1F3864;font-size:21px}h2{color:#1F3864;font-size:17px;border-bottom:2px solid #E3EFEB;padding-bottom:4px}strong{color:#1F3864}table{border-collapse:collapse;width:100%;font-size:13px}th{background:#E3EFEB;color:#1F3864;text-align:left;padding:7px 9px;border:1px solid #D8DEE3}td{padding:7px 9px;border:1px solid #D8DEE3;vertical-align:top}blockquote{border-left:4px solid #1F6A59;margin:10px 0;padding:6px 14px;color:#4E5A66}footer{color:#4E5A66;font-size:12px;margin:24px 0 8px}em{color:#1F6A59}</style></head><body><div class="wrap"><nav><a href="../index.html">Portfolio home</a><a href="../docs/ace-aligned-agent-governance.html">ACE agent governance</a><a href="../methods/migration-parity-testing.html">Parity testing</a><a href="../training/azure-soc-14-days/index.html">Cloud in 14 Days</a><a href="https://github.com/Docsaf/Threat-Engineering">Repo</a></nav>
+<h1
+id="migration-parity-testing-eight-dimensions-proven-weekly">Migration
+Parity Testing: Eight Dimensions, Proven Weekly</h1>
+<p><strong>How to retire a security tool without discovering what it was
+quietly doing for you.</strong></p>
+<p>The principle: parity is proven, never assumed, and every retirement
+is gated on evidence. When migrating between endpoint/EDR stacks, "it
+seems fine" is not a cutover criterion. Define parity as eight testable
+dimensions, score them weekly on one page, and require four consecutive
+all-green weeks before the retirement decision.</p>
+<table>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Dimension</th>
+<th>The test</th>
+<th>Pass condition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Coverage</td>
+<td>Device census from both consoles weekly; no agent removed until the
+new stack verifies that device</td>
+<td>100% visible, delta empty two consecutive weeks</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Detection efficacy</td>
+<td>Fixed safe simulation set (EICAR, ATT&amp;CK-aligned Atomic Red Team
+scenarios) run identically on both stacks</td>
+<td>No scenario the old stack catches that the new one misses</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Alert fidelity</td>
+<td>30 days of dual-run alerts compared: FP rates, severity agreement,
+time-to-alert</td>
+<td>New FP rate at or below baseline, no severity downgrades on true
+positives</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Telemetry depth</td>
+<td>Event-class inventory and retention window vs what your IR playbook
+depends on</td>
+<td>Every playbook-required event class queryable for the stated
+window</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Response actions</td>
+<td>Timed live tests: isolate, kill, quarantine, live response, on every
+OS you run</td>
+<td>Every playbook action executable in comparable time; gaps documented
+with compensations</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Operational workflow</td>
+<td>One full alert-to-ticket-to-report-to-evidence cycle</td>
+<td>Runs without manual glue</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Threat intelligence</td>
+<td>Inventory what the outgoing tool's intel actually provided; stand up
+replacement feeds and triage enrichment</td>
+<td>Feeds live, enrichment executing in triage</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Evidence continuity</td>
+<td>Auditor-facing artifacts produced entirely from the new stack</td>
+<td>One month of evidence accepted into the archive</td>
+</tr>
+</tbody>
+</table>
+<p>Dimension 7 exists as its own line because bundled threat
+intelligence is the thing migrations quietly lose. Inventory it before
+you can lose it; a tier probe against the vendor API often answers in
+one call what the contract PDF hides.</p>
+<p>Rules that make the scorecard honest: tuning without a failed pass
+condition does not reset the streak; a miss gets a root cause and a
+retest, never a shrug; and the export of the outgoing tool's data
+happens before cutover, because it vanishes with the contract.</p>
+<footer>Dr. Safi Mojidi · Hacking the Workforce · Threat Engineering portfolio. Key inspiration: Camille Stewart Gloster, <em>The Insider You Built</em> (Wiley, 2026).</footer></div></body></html>

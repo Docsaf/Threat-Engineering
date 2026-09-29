@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cloud in 14 Days: Azure, AWS, and GCP to an AI-Enhanced SOC</title><style>
+body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#222;background:#FAFBFC;font-size:14px;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:14px}
+header{background:#1F3864;color:#fff;padding:14px 18px;border-radius:8px}
+header h1{margin:0;font-size:18px}header p{margin:4px 0 0;color:#D8DEE3;font-size:12px}
+h2{color:#1F3864;font-size:16px;margin:22px 0 6px;border-bottom:2px solid #E3EFEB;padding-bottom:4px}
+h3{color:#1F6A59;font-size:14px;margin:14px 0 4px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;margin:8px 0}
+th{background:#E3EFEB;color:#1F3864;text-align:left;padding:6px 8px;border:1px solid #D8DEE3}
+td{padding:6px 8px;border:1px solid #D8DEE3;vertical-align:top}
+.note{background:#FBF3E4;border-left:4px solid #8A5A10;padding:8px 12px;font-size:12.5px;margin:10px 0}
+.day{background:#fff;border:1px solid #D8DEE3;border-left:4px solid #1F6A59;border-radius:8px;padding:9px 13px;margin:8px 0}
+.day b{color:#1F3864}.small{color:#4E5A66;font-size:11.5px}
+code{background:#F1F3F5;padding:1px 5px;border-radius:4px;font-size:12px}
+</style></head><body><div class="wrap">
+<header><h1>Cloud in 14 Days: Building an AI-Enhanced SOC as a First Security Hire (Azure spine, AWS and GCP in scope)</h1>
+<p>No-BS operator's path: learn only what the SOC build needs, in the order the build needs it · 2.5 hrs/day (90 learn + 60 hands-on in your tenant) · Every day ends with an artifact · By Dr. Safi Mojidi · Hacking the Workforce · shared in the spirit of knowledge, health, wealth, and security</p></header>
+<div class="note"><b>The spine:</b> Microsoft's SC-200 (Security Operations Analyst) learning path IS this curriculum's backbone: it covers Defender XDR, Defender for Cloud, and Sentinel, free on Microsoft Learn, and doubles as exam prep. Credential ladder: <b>SC-200</b> (Azure-native, sit it when ready), <b>CySA+ as the vendor-neutral baseline (exam by end of your committed exam window, the committed measure)</b>, SANS SEC504/GCIH if budget appears (ask your sponsor alongside the insurance question, roughly $8-9k). Your inherited triage thresholds slot into Day 8. Everything hands-on is read-only or in Cyber-owned scope until the RBAC section below is agreed.</div>
+
+<h2>Week 1 · Foundations, mapped to a real estate, not a sandbox</h2>
+<div class="day"><b>Day 1 (Wed Sep 30) · Tenant orientation + the first investigation.</b> Learn: Defender XDR portal structure, device discovery vs onboarding (SC-200 module 1). Hands-on: work the live case: a first-login finding: discovered devices showing zero onboarded in the portal. Advanced hunting: <code>DeviceInfo | summarize by DeviceName, OSPlatform, OnboardingStatus</code>. Reconcile against your MDM enrollment counts. Determine: real unmanaged endpoints, device-group scoping on your role, or a tenant mismatch. <b>Artifact: investigation note #1, filed as your SOC's first case record.</b></div>
+<div class="day"><b>Day 2 (Thu Oct 1) · Entra ID and identity as the perimeter.</b> Learn: Entra roles, PIM, Conditional Access basics. Hands-on: map who currently holds security roles in the tenant; draft the RBAC table below as a proposal. Artifact: current-state role export + gaps.</div>
+<div class="day"><b>Day 3 (Fri Oct 2) · Defender for Endpoint operations.</b> Learn: onboarding methods, device groups, alert/incident model, response actions. Hands-on: verify your own enrolled device appears; trace one alert end to end; confirm the compliance evidence exports your certification needs. Artifact: MDE runbook page 1.</div>
+<div class="day"><b>Day 4 (Sat Oct 3) · Defender for Cloud + the AWS bridge.</b> Learn: CSPM vs workload protection, multicloud connectors. Hands-on: read-only review of connector state; draft the precise change ticket for the AWS CloudFormation connector for your infrastructure team. Artifact: the ticket text + connector plan mapped to your cloud metrics.</div>
+<div class="day"><b>Day 5 (Sun Oct 4, light) · KQL, the SOC's native tongue.</b> Learn: KQL fundamentals (Must Learn KQL series / SC-200 hunting modules). Hands-on: five queries against DeviceInfo, AlertInfo, IdentityLogonEvents. Artifact: personal query pack v1.</div>
+<div class="day"><b>Day 6 (Mon Oct 5, light) · CySA+ enrollment + reading.</b> Register exam window (target inside your committed window), skim objectives, map which domains this build already teaches (most of 1-3). Artifact: study calendar to exam date.</div>
+<div class="day"><b>Day 7 (Tue Oct 6) · Sentinel architecture + cost model.</b> Learn: workspaces, data connectors, analytics rules, ingestion pricing. Hands-on: inventory current connectors and tables; pull 7-day ingestion by table (feeds your budget model's sizing line). Artifact: ingestion baseline note.</div>
+
+<h2>Week 2 · From console operator to SOC designer</h2>
+<div class="day"><b>Day 8 (Wed Oct 7) · Triage doctrine.</b> Learn: incident triage models (SC-200 incident mgmt). Hands-on: write your triage thresholds v0.1: severity definitions, escalation clocks, inherited thresholds reconciled against your IR playbook tiers. Artifact: triage threshold sheet (the SOC's first standard).</div>
+<div class="day"><b>Day 9 (Thu Oct 8) · Automation rules + playbooks.</b> Learn: Sentinel automation rules, Logic Apps playbooks. Hands-on: design (not deploy) three: auto-enrich with TI, auto-assign by remediation lane (endpoint / cloud), auto-close known-benign. Artifact: playbook specs with HITL points marked.</div>
+<div class="day"><b>Day 10 (Fri Oct 9) · AI in the SOC, honestly.</b> Learn: Security Copilot capabilities and pricing (SCU model), agent patterns for triage/enrichment/reporting. Hands-on: write the register entries for the three SOC agents below, delegated authority stated. Artifact: agent specs into your AI agent register.</div>
+<div class="day"><b>Day 11 (Sat Oct 10) · Threat intel wiring.</b> Learn: Sentinel TI connectors, custom indicators in Defender. Hands-on: enable-plan for CISA KEV + AIS + abuse.ch (costed, ticketed, not clicked). Artifact: TI ingestion plan tied to your migration parity checks.</div>
+<div class="day"><b>Day 12 (Sun Oct 11, light) · Reporting engines.</b> Draft the two products below (daily + weekly) as templates; test-generate one daily report by hand from portal data. Artifact: both templates v0.1.</div>
+<div class="day"><b>Day 13 (Mon Oct 12, light) · CySA+ domain study block.</b> Focus: incident response + reporting domains (they mirror days 8-12). Artifact: practice-test score baseline.</div>
+<div class="day"><b>Day 14 (Tue Oct 13) · Assemble the POC.</b> Write the one-page SOC POC: scope, the three agents with HITL gates, RBAC model, reporting cadence, inputs checklist status, success measures, 30-day pilot ask. Artifact: POC doc to your executive sponsor, with the cyber-insurance services answer folded in. <b>This is the deliverable the 14 days exist for.</b></div>
+
+
+<h2>Multi-cloud scope: one SOC, three clouds</h2>
+<p>The 14-day spine is Azure-first because the SOC console lives there, but every capability has an AWS and GCP equivalent, and the POC treats all three as sources feeding one SOC. Capability map:</p>
+<table><tr><th>Capability</th><th>Azure</th><th>AWS</th><th>GCP</th></tr>
+<tr><td>SIEM / analytics home</td><td>Microsoft Sentinel</td><td>Security Hub findings + CloudTrail/Security Lake exported to your SIEM</td><td>Google SecOps (Chronicle) or log sinks exported to your SIEM</td></tr>
+<tr><td>Threat detection</td><td>Defender XDR</td><td>GuardDuty</td><td>Security Command Center (Event Threat Detection)</td></tr>
+<tr><td>Posture / CSPM</td><td>Defender for Cloud</td><td>Security Hub CSPM</td><td>Security Command Center posture</td></tr>
+<tr><td>Vulnerability management</td><td>Defender Vulnerability Mgmt</td><td>Amazon Inspector</td><td>SCC vulnerability findings + OS Config</td></tr>
+<tr><td>Identity + privileged access</td><td>Entra ID + PIM</td><td>IAM Identity Center + IAM Access Analyzer</td><td>Cloud Identity + IAM + Privileged Access Manager</td></tr>
+<tr><td>Audit trail</td><td>Entra + Azure Activity logs</td><td>CloudTrail (organization trail)</td><td>Cloud Audit Logs (org sink)</td></tr>
+<tr><td>Sensitive data discovery</td><td>Purview</td><td>Macie</td><td>Sensitive Data Protection</td></tr>
+<tr><td>Automation / playbooks</td><td>Sentinel automation + Logic Apps</td><td>EventBridge + Lambda + Security Hub automations</td><td>SCC + Workflows / Cloud Functions</td></tr></table>
+<h3>Running the 14 days multi-cloud: the per-day lens</h3>
+<table><tr><th>Day</th><th>AWS lens</th><th>GCP lens</th></tr>
+<tr><td>1 · Inventory truth</td><td>AWS Config inventory + EC2 census vs what your consoles claim</td><td>Cloud Asset Inventory census vs project list</td></tr>
+<tr><td>2 · Identity map</td><td>Who holds security roles in IAM Identity Center; Access Analyzer findings</td><td>IAM policy review + role recommender output</td></tr>
+<tr><td>3 · Endpoint/server reach</td><td>Server onboarding path (SSM agent health = your scanning coverage)</td><td>OS Config agent coverage</td></tr>
+<tr><td>4 · Connectors</td><td>Defender for Cloud AWS connector (CloudFormation, via change ticket)</td><td>Defender for Cloud GCP connector, same discipline</td></tr>
+<tr><td>5 · Query language</td><td>Athena/SQL over CloudTrail alongside KQL</td><td>UDM search in SecOps or Log Analytics SQL</td></tr>
+<tr><td>7 · Ingestion + cost</td><td>Organization CloudTrail volume = your ingestion sizing input</td><td>Org log sink volume, same math</td></tr>
+<tr><td>11 · Threat intel</td><td>GuardDuty threat lists + the same KEV/AIS feeds</td><td>SCC + the same community feeds</td></tr></table>
+<p class="small">Rule that keeps this honest: native services already running in any cloud are validated, costed, and fed to the SOC before any new tool is bought for that cloud. The first question is always what is already on and what it already costs.</p>
+<h2>The AI-enhanced SOC POC: agree the shape up front</h2>
+<table><tr><th>Agent</th><th>Does</th><th>HITL required (non-negotiable)</th></tr>
+<tr><td>Triage agent</td><td>Enriches new alerts (TI, asset owner, prior history), proposes severity + lane, drafts the ticket</td><td>Human confirms severity Sev 0-2; agent may auto-file Sev 3-4 informational only</td></tr>
+<tr><td>Investigation agent</td><td>Runs the standard KQL pack per incident type, assembles a timeline draft</td><td>Human approves scope before any query touching identity or client-named resources; all response actions human-executed</td></tr>
+<tr><td>Reporting agent</td><td>Generates the daily threat report and drafts the weekly brief from case data</td><td>Human review before send, always; "no rework from me" is the tuning target, not a reason to remove the gate</td></tr></table>
+<p class="small">Tenets kept: agents read and draft, humans decide and act; every agent action logged to the case record; agents registered with delegated authority stated; nothing agent-built touches client environments.</p>
+
+<h2>RBAC, separation of duties, least privilege (day-one team scoping)</h2>
+<table><tr><th>Person/function</th><th>Standing role</th><th>Elevated (PIM, eligible not active)</th><th>Separation rule</th></tr>
+<tr><td>Security director</td><td>Security Reader + Sentinel Reader</td><td>Security Administrator, time-boxed, justification logged</td><td>Approves standards; does not routinely operate what they audit</td></tr>
+<tr><td>Security engineer</td><td>Security Operator + Sentinel Responder</td><td>Sentinel Contributor for rule changes, PIM</td><td>Operates response; cannot alter audit/log retention settings</td></tr>
+<tr><td>IT Ops lead</td><td>Existing endpoint/Intune roles unchanged</td><td>—</td><td>Endpoint ops stays IT Ops; security response stays Cyber</td></tr>
+<tr><td>GRC lead</td><td>Security Reader (reports over logins)</td><td>—</td><td>Reviews evidence; never operates controls being reviewed</td></tr>
+<tr><td>Break-glass</td><td>Sealed Global Admin pair, monitored, alert-on-use</td><td>—</td><td>Investigations only; use auto-creates a case</td></tr></table>
+
+<h2>Communication + reporting products (the operational contract)</h2>
+<p><b>Daily Threat Report</b> (security's partners: IT Ops, GRC, Legal): yesterday's incident counts by severity/lane, notable cases in two lines each, TI items relevant to your sectors, agent-drafted, human-sent by 09:00 ET. <b>Weekly Threat Brief + Incident Retro</b> (whole org): the week's picture, one lesson, one metric trending toward risk terms your executive team can use; grows into the risk measure. Measure for both: no weeks missed, no rework needed from you. Feedback loops that must exist before "operational": IT Ops (endpoint context + heads-up channel), infrastructure liaisons (cloud/client context), GRC (evidence + training linkage), Legal (contract notification triggers), People (joiner/leaver feed), BD (early warning both directions).</p>
+
+<h2>Inputs checklist: what the SOC needs to be operational (Day 1 investigation seeds this)</h2>
+<p class="small">Device inventory reconciled (MDM = Defender = HR system counts) · role/tenant scoping verified (the 13-device case answers this) · log sources connected with ingestion costed · triage thresholds signed (Day 8) · two-lane routing live · IR playbook SLAs · TI feeds (Day 11 plan) · RBAC table agreed (above) · reporting templates (Day 12) · liaison roster per delivery team · insurance services confirmed with your sponsor: breach coach, IR retainer/forensics panel, notification hotline: ask which are included before buying anything they already provide · agent register entries filed.</p>
+<p class="small">Tooling beyond the Microsoft stack, only as needed: Jira (case records, exists) · Logic Apps (playbooks, licensed) · Security Copilot (priced per SCU: pilot decision AFTER manual baseline, week 3+) · no new purchases inside the 14 days.</p>
+</div></body></html>

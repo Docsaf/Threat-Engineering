@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ACE-Aligned Agent Governance for the SOC</title><style>body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#222;background:#FAFBFC;font-size:15px;line-height:1.6}.wrap{max-width:880px;margin:0 auto;padding:16px}nav{background:#1F3864;border-radius:8px;padding:10px 16px;margin-bottom:14px}nav a{color:#fff;text-decoration:none;font-size:13px;margin-right:18px}nav a:hover{text-decoration:underline}h1{color:#1F3864;font-size:21px}h2{color:#1F3864;font-size:17px;border-bottom:2px solid #E3EFEB;padding-bottom:4px}strong{color:#1F3864}table{border-collapse:collapse;width:100%;font-size:13px}th{background:#E3EFEB;color:#1F3864;text-align:left;padding:7px 9px;border:1px solid #D8DEE3}td{padding:7px 9px;border:1px solid #D8DEE3;vertical-align:top}blockquote{border-left:4px solid #1F6A59;margin:10px 0;padding:6px 14px;color:#4E5A66}footer{color:#4E5A66;font-size:12px;margin:24px 0 8px}em{color:#1F6A59}</style></head><body><div class="wrap"><nav><a href="../index.html">Portfolio home</a><a href="../docs/ace-aligned-agent-governance.html">ACE agent governance</a><a href="../methods/migration-parity-testing.html">Parity testing</a><a href="../training/azure-soc-14-days/index.html">Cloud in 14 Days</a><a href="https://github.com/Docsaf/Threat-Engineering">Repo</a></nav>
+<h1 id="ace-aligned-agent-governance-for-the-soc">ACE-Aligned Agent
+Governance for the SOC</h1>
+<p><strong>Our practice, designed against the questions the ACE
+Framework teaches organizations to ask.</strong></p>
+<p>Source of inspiration: Camille Stewart Gloster, <em>The Insider You
+Built: How Organizations Stay in Control of Autonomous AI Agents</em>
+(Wiley, 2026). The book introduces the Agent-Centered Enforcement and
+Attribution (ACE) Framework for investigating, attributing, and
+responding to failures when autonomous AI systems act with delegated
+authority, and reframes AI incidents as governance challenges spanning
+human and machine decision paths. Read the book; this document is what
+we built once we took it seriously.</p>
+<h2 id="the-problem-in-one-sentence">The problem in one sentence</h2>
+<p>A SOC that uses AI agents has created new insiders, and if you cannot
+say what authority each one holds, what it did, and who answers for it,
+you have an attribution gap wearing an efficiency costume.</p>
+<h2 id="our-design-answers-per-soc-agent">Our design answers, per SOC
+agent</h2>
+<p>Every agent in our SOC (triage, investigation, reporting) ships with
+four things before it processes its first alert:</p>
+<p><strong>1. A register entry with delegated authority stated.</strong>
+What the agent may read, what it may draft, what it may never do. The
+register is reviewed like an access grant, because it is one.</p>
+<p><strong>2. Attribution by construction.</strong> Every agent action
+logs to the case record with the agent identified as the actor and the
+human approver identified for anything that crossed a gate. When
+something goes wrong, the human-and-machine decision path is already
+written down; the investigation reads it rather than reconstructs
+it.</p>
+<p><strong>3. Enforcement points, honestly placed.</strong>
+Human-in-the-loop gates sit where consequence lives: severity
+confirmation on high-severity cases, scope approval before queries touch
+identity or client-named resources, human review before any report
+leaves the building. "No rework needed" is the tuning target for agent
+output quality; it is never the argument for removing a gate.</p>
+<p><strong>4. A response path when the agent is the incident.</strong>
+Agent misbehavior is triaged through the same incident process as any
+insider event: contain (suspend the agent's authority), investigate (the
+attribution log), attribute (which decision path failed, human or
+machine), correct (register, gate, or model), and record. Static
+approval-at-deployment is not governance; the review cadence is.</p>
+<h2 id="what-this-looks-like-operationally">What this looks like
+operationally</h2>
+<ul>
+<li>The agent register lives beside the access model, reviewed on the
+same cadence.</li>
+<li>Agent identities are distinct principals, never shared human
+credentials, so logs attribute cleanly.</li>
+<li>Nothing agent-built touches client environments. Agents serve the
+SOC's internal machinery.</li>
+<li>The register's delegated-authority column is the first artifact an
+auditor, insurer, or customer sees when they ask "how do you control
+your AI?"</li>
+</ul>
+<p>The measure of success: when an agent does something surprising, the
+first hour is spent responding, not discovering who authorized what.</p>
+<footer>Dr. Safi Mojidi · Hacking the Workforce · Threat Engineering portfolio. Key inspiration: Camille Stewart Gloster, <em>The Insider You Built</em> (Wiley, 2026).</footer></div></body></html>

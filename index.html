@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Threat Engineering: Operationalizing a Modern AI-Enhanced SOC</title><style>
+:root{--navy:#1F3864;--teal:#1F6A59;--amber:#8A5A10;--line:#D8DEE3;--bg:#FAFBFC}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;color:#222;background:var(--bg);font-size:15px;line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+header{background:var(--navy);color:#fff;padding:18px 20px;border-radius:10px}
+header h1{margin:0;font-size:21px}header p{margin:6px 0 0;color:#D8DEE3;font-size:13px}
+h2{color:var(--navy);font-size:17px;margin:26px 0 8px;border-bottom:2px solid #E3EFEB;padding-bottom:5px}
+figure{margin:14px 0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
+figcaption{font-size:12.5px;color:#4E5A66;margin-top:8px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0}
+th{background:#E3EFEB;color:var(--navy);text-align:left;padding:7px 9px;border:1px solid var(--line)}
+td{padding:7px 9px;border:1px solid var(--line);vertical-align:top}
+.rules li{margin:5px 0}a{color:var(--teal)}
+footer{color:#4E5A66;font-size:12px;margin:26px 0 10px}
+</style></head><body><div class="wrap">
+<header><h1>Threat Engineering</h1>
+<p>A working portfolio of what it actually takes to operationalize a modern, AI-enhanced Security Operations Center across Azure, AWS, and GCP. By Dr. Safi Mojidi · Hacking the Workforce · shared in the spirit of knowledge, health, wealth, and security.</p></header>
+
+<h2>The thesis</h2>
+<p>Threat engineering is the discipline between security architecture and security operations: building the detection, response, evidence, and governance machinery so a SOC runs as a system rather than a heroic individual. Every artifact here was proven in a real environment first, then sanitized for publication. Nothing here is theoretical.</p>
+<p>For agent governance, this portfolio's north star is Camille Stewart Gloster's <em>The Insider You Built: How Organizations Stay in Control of Autonomous AI Agents</em> (Wiley, 2026) and its Agent-Centered Enforcement and Attribution (ACE) Framework: AI incidents as governance challenges, delegated authority made explicit, continuous operational control across human and machine decision paths. Our SOC agents are designed so those questions are answerable on day one.</p>
+
+<h2>Diagram 1 · The portfolio pipeline: how knowledge gets here</h2>
+<figure><svg viewBox="0 0 900 150" role="img" aria-labelledby="d1t" style="width:100%;height:auto"><title id="d1t">Pipeline: proven in production, sanitized, published, taught, and improvements fed back</title>
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#1F3864"/></marker></defs>
+<g font-family="Arial" font-size="14">
+<rect x="15" y="45" width="185" height="56" rx="9" fill="#1F3864"/><text x="107" y="69" fill="#fff" text-anchor="middle" font-weight="bold">PROVEN</text><text x="107" y="88" fill="#D8DEE3" text-anchor="middle" font-size="11">in a live environment</text>
+<rect x="245" y="45" width="185" height="56" rx="9" fill="#1F6A59"/><text x="337" y="69" fill="#fff" text-anchor="middle" font-weight="bold">SANITIZED</text><text x="337" y="88" fill="#D8F0E8" text-anchor="middle" font-size="11">roles not names, patterns not tenants</text>
+<rect x="475" y="45" width="185" height="56" rx="9" fill="#8A5A10"/><text x="567" y="69" fill="#fff" text-anchor="middle" font-weight="bold">PUBLISHED</text><text x="567" y="88" fill="#F6E8CF" text-anchor="middle" font-size="11">verified zero identifiers</text>
+<rect x="705" y="45" width="180" height="56" rx="9" fill="#1F3864"/><text x="795" y="69" fill="#fff" text-anchor="middle" font-weight="bold">TAUGHT</text><text x="795" y="88" fill="#D8DEE3" text-anchor="middle" font-size="11">legacy for the workforce</text>
+<line x1="200" y1="73" x2="240" y2="73" stroke="#1F3864" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="430" y1="73" x2="470" y2="73" stroke="#1F3864" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="660" y1="73" x2="700" y2="73" stroke="#1F3864" stroke-width="2.5" marker-end="url(#a)"/>
+<path d="M 795 101 L 795 128 L 107 128 L 107 105" fill="none" stroke="#4E5A66" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#a)"/>
+<text x="450" y="144" fill="#4E5A66" text-anchor="middle" font-size="11">what teaching reveals goes back into practice</text></g></svg>
+<figcaption>Every artifact travels this pipeline. The sanitize step is verified programmatically, never eyeballed, and the loop back is why the portfolio keeps improving.</figcaption></figure>
+
+<h2>Diagram 2 · ACE-aligned agent governance: four answers before the first alert</h2>
+<figure><svg viewBox="0 0 900 240" role="img" aria-labelledby="d2t" style="width:100%;height:auto"><title id="d2t">An AI agent surrounded by four governance controls: register, attribution, enforcement gates, and a response path, with humans deciding</title>
+<g font-family="Arial" font-size="13">
+<circle cx="450" cy="120" r="52" fill="#1F6A59"/><text x="450" y="115" fill="#fff" text-anchor="middle" font-weight="bold">SOC</text><text x="450" y="133" fill="#fff" text-anchor="middle" font-weight="bold">AGENT</text>
+<rect x="40" y="25" width="230" height="62" rx="9" fill="#fff" stroke="#1F3864" stroke-width="2"/><text x="155" y="49" text-anchor="middle" font-weight="bold" fill="#1F3864">1 · Register entry</text><text x="155" y="68" text-anchor="middle" fill="#4E5A66" font-size="11">delegated authority stated, reviewed like access</text>
+<rect x="630" y="25" width="230" height="62" rx="9" fill="#fff" stroke="#1F3864" stroke-width="2"/><text x="745" y="49" text-anchor="middle" font-weight="bold" fill="#1F3864">2 · Attribution built in</text><text x="745" y="68" text-anchor="middle" fill="#4E5A66" font-size="11">every action logged: agent actor, human approver</text>
+<rect x="40" y="155" width="230" height="62" rx="9" fill="#fff" stroke="#8A5A10" stroke-width="2"/><text x="155" y="179" text-anchor="middle" font-weight="bold" fill="#8A5A10">3 · Enforcement gates</text><text x="155" y="198" text-anchor="middle" fill="#4E5A66" font-size="11">HITL where consequence lives: severity, scope, send</text>
+<rect x="630" y="155" width="230" height="62" rx="9" fill="#fff" stroke="#8A5A10" stroke-width="2"/><text x="745" y="179" text-anchor="middle" font-weight="bold" fill="#8A5A10">4 · Response path</text><text x="745" y="198" text-anchor="middle" fill="#4E5A66" font-size="11">agent misbehavior triaged as an insider incident</text>
+<line x1="270" y1="60" x2="405" y2="100" stroke="#1F3864" stroke-width="1.8"/><line x1="630" y1="60" x2="495" y2="100" stroke="#1F3864" stroke-width="1.8"/>
+<line x1="270" y1="182" x2="405" y2="142" stroke="#8A5A10" stroke-width="1.8"/><line x1="630" y1="182" x2="495" y2="142" stroke="#8A5A10" stroke-width="1.8"/>
+<text x="450" y="228" text-anchor="middle" fill="#1F3864" font-weight="bold" font-size="12">Agents read and draft. Humans decide and act.</text></g></svg>
+<figcaption>Inspired by the ACE Framework (Stewart Gloster, 2026): if you cannot say what authority an agent holds, what it did, and who answers for it, you have an attribution gap wearing an efficiency costume.</figcaption></figure>
+
+<h2>Diagram 3 · One SOC, three clouds</h2>
+<figure><svg viewBox="0 0 900 210" role="img" aria-labelledby="d3t" style="width:100%;height:auto"><title id="d3t">Azure, AWS, and GCP signals all flowing into one SOC with agents and humans, producing reports and evidence</title>
+<g font-family="Arial" font-size="13">
+<rect x="60" y="20" width="200" height="50" rx="9" fill="#1F3864"/><text x="160" y="42" fill="#fff" text-anchor="middle" font-weight="bold">Azure</text><text x="160" y="60" fill="#D8DEE3" text-anchor="middle" font-size="10.5">Defender XDR · Sentinel · Entra</text>
+<rect x="350" y="20" width="200" height="50" rx="9" fill="#1F3864"/><text x="450" y="42" fill="#fff" text-anchor="middle" font-weight="bold">AWS</text><text x="450" y="60" fill="#D8DEE3" text-anchor="middle" font-size="10.5">GuardDuty · Inspector · CloudTrail</text>
+<rect x="640" y="20" width="200" height="50" rx="9" fill="#1F3864"/><text x="740" y="42" fill="#fff" text-anchor="middle" font-weight="bold">GCP</text><text x="740" y="60" fill="#D8DEE3" text-anchor="middle" font-size="10.5">SCC · SecOps · Audit Logs</text>
+<line x1="160" y1="70" x2="390" y2="115" stroke="#1F6A59" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="450" y1="70" x2="450" y2="112" stroke="#1F6A59" stroke-width="2.5" marker-end="url(#a)"/>
+<line x1="740" y1="70" x2="510" y2="115" stroke="#1F6A59" stroke-width="2.5" marker-end="url(#a)"/>
+<rect x="330" y="118" width="240" height="52" rx="9" fill="#1F6A59"/><text x="450" y="140" fill="#fff" text-anchor="middle" font-weight="bold">ONE SOC</text><text x="450" y="158" fill="#D8F0E8" text-anchor="middle" font-size="10.5">agents draft · humans decide · everything cased</text>
+<line x1="330" y1="144" x2="150" y2="144" stroke="#8A5A10" stroke-width="2" marker-end="url(#a)"/><text x="150" y="132" text-anchor="middle" fill="#8A5A10" font-size="11" font-weight="bold">Daily Threat Report</text><text x="150" y="160" text-anchor="middle" fill="#4E5A66" font-size="10.5">IT Ops · GRC · Legal</text>
+<line x1="570" y1="144" x2="750" y2="144" stroke="#8A5A10" stroke-width="2" marker-end="url(#a)"/><text x="755" y="132" text-anchor="middle" fill="#8A5A10" font-size="11" font-weight="bold">Weekly Brief + Retro</text><text x="755" y="160" text-anchor="middle" fill="#4E5A66" font-size="10.5">whole org → risk measure</text>
+<text x="450" y="196" text-anchor="middle" fill="#4E5A66" font-size="11">Rule: validate and cost what each cloud already runs natively before buying anything new for it.</text></g></svg>
+<figcaption>The SOC treats all three clouds as signal sources feeding one triage doctrine, one case system, and two reporting products with a "no weeks missed, no rework" measure.</figcaption></figure>
+
+<h2>Diagram 4 · Why it matters: the maturity this builds</h2>
+<figure><svg viewBox="0 0 900 170" role="img" aria-labelledby="d4t" style="width:100%;height:auto"><title id="d4t">Staircase from heroic individual to governed system: visibility, doctrine, automation with human gates, then measured risk</title>
+<g font-family="Arial" font-size="12.5">
+<rect x="30" y="115" width="195" height="38" rx="7" fill="#D8DEE3"/><text x="127" y="138" text-anchor="middle" fill="#1F3864" font-weight="bold">Heroic individual</text>
+<rect x="250" y="90" width="195" height="38" rx="7" fill="#B9D6CE"/><text x="347" y="113" text-anchor="middle" fill="#1F3864" font-weight="bold">Visibility + inventory truth</text>
+<rect x="470" y="65" width="195" height="38" rx="7" fill="#7FB8A8"/><text x="567" y="88" text-anchor="middle" fill="#1F3864" font-weight="bold">Doctrine + evidence</text>
+<rect x="690" y="40" width="195" height="38" rx="7" fill="#1F6A59"/><text x="787" y="57" text-anchor="middle" fill="#fff" font-weight="bold">Agents with gates</text><text x="787" y="72" text-anchor="middle" fill="#D8F0E8" font-size="10.5">scale without losing control</text>
+<line x1="225" y1="130" x2="252" y2="112" stroke="#1F3864" stroke-width="2" marker-end="url(#a)"/>
+<line x1="445" y1="105" x2="472" y2="87" stroke="#1F3864" stroke-width="2" marker-end="url(#a)"/>
+<line x1="665" y1="80" x2="692" y2="62" stroke="#1F3864" stroke-width="2" marker-end="url(#a)"/>
+<text x="450" y="25" text-anchor="middle" fill="#1F3864" font-weight="bold" font-size="13">The point is not tools. It is a SOC that survives its founder's calendar.</text></g></svg>
+<figcaption>Each artifact in this portfolio moves a team one step right: inventory truth, then doctrine and evidence, then governed automation. That staircase is what regulated-industry customers and auditors actually buy.</figcaption></figure>
+
+<h2>What's in the portfolio</h2>
+<table><tr><th>Path</th><th>Artifact</th></tr>
+<tr><td><a href="training/azure-soc-14-days/index.html">training/azure-soc-14-days/</a></td><td>Cloud in 14 Days: the operator's path to an AI-enhanced SOC POC, Azure spine with AWS and GCP mapped daily</td></tr>
+<tr><td><a href="docs/ace-aligned-agent-governance.html">docs/ace-aligned-agent-governance.html</a></td><td>How SOC agents ship with authority, attribution, enforcement, and a response path built in</td></tr>
+<tr><td><a href="methods/migration-parity-testing.html">methods/migration-parity-testing.html</a></td><td>Eight-dimension parity method for retiring tools on evidence, not vibes</td></tr>
+<tr><td><a href="ROADMAP.md">ROADMAP.md</a></td><td>What lands next, in the order it gets proven</td></tr></table>
+
+<h2>The rules of this repo</h2>
+<ol class="rules">
+<li><b>Proven first, published second.</b> Every artifact ran somewhere real.</li>
+<li><b>Sanitized always.</b> Roles, not names; patterns, not tenants; methods, not client details.</li>
+<li><b>Sources credited, never reproduced.</b> We point to the authoritative source and add our practice.</li>
+<li><b>Humans decide, agents draft.</b> The portfolio practices the governance it preaches.</li>
+</ol>
+<footer>Dr. Safi Mojidi · <a href="https://www.hackingtheworkforce.org">Hacking the Workforce</a> · Threat Engineering portfolio. Key inspiration: Camille Stewart Gloster, <em>The Insider You Built</em> (Wiley, 2026). Read the book.</footer>
+</div></body></html>
